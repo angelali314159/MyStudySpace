@@ -1,0 +1,3 @@
+/Users/qiqi/CLionProjects/MyStudySpace/cmake-build-debug/CMakeFiles/MyStudySpace.dir
+/Users/qiqi/CLionProjects/MyStudySpace/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/qiqi/CLionProjects/MyStudySpace/cmake-build-debug/CMakeFiles/rebuild_cache.dir
