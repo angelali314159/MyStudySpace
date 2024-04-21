@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,43 +11,20 @@
 using namespace std;
 using namespace std::chrono;
 using json = nlohmann::json;
+=======
+#include "mainwindow.h"
+#include "outputwindow.h"
 
-// merge sort
-void merge(vector<pair<string, int>>& songs, int left, int middle, int right) {
-    int n1 = middle - left + 1;
-    int n2 = right - middle;
+#include <QApplication>
 
-    vector<pair<string, int>> L(n1), R(n2);
-    // Copy data to temp arrays L[] and R[]
-    for (int i = 0; i < n1; i++)
-        L[i] = songs[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = songs[middle + 1 + j];
-    // Merge the temp arrays back into songs
-    int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (L[i].second <= R[j].second) {
-            songs[k] = L[i];
-            i++;
-        } else {
-            songs[k] = R[j];
-            j++;
-        }
-        k++;
-    }
-    // Copy the remaining elements of L[]
-    while (i < n1) {
-        songs[k] = L[i];
-        i++;
-        k++;
-    }
-    // Copy the remaining elements of R[]
-    while (j < n2) {
-        songs[k] = R[j];
-        j++;
-        k++;
-    }
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec(); //enter event loop
 }
+
 void mergeSort(vector<pair<string, int>>& songs, int left, int right) {
     if (left < right) {
         int middle = left + (right - left) / 2;
