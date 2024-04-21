@@ -182,7 +182,7 @@ int main(int argc, char*argv[]) {
         int breakTime = get<2>(schedule[i]);
         string startTime = prevEndTime;
         bool morning;
-        if (startTime[startTime.length() - 2] == 'A') {
+        if (startTime[startTime.length() - 2] == 'a') {
             morning = true;
         }
         else {
@@ -191,7 +191,7 @@ int main(int argc, char*argv[]) {
         prevEndTime = getEndTime(startTime, minutes, morning);
         cout << startTime << ": " << name << endl;
         startTime = prevEndTime;
-        if (startTime[startTime.length() - 2] == 'A') {
+        if (startTime[startTime.length() - 2] == 'a') {
             morning = true;
         }
         else {
