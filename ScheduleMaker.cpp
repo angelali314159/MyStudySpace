@@ -62,10 +62,10 @@ string getEndTime(string startTime, int minutes, bool am) {
     }
     time += to_string(minute);
     if (am) {
-        time += "AM";
+        time += " am";
     }
     else {
-        time += "PM";
+        time += " pm";
     }
     return time;
 }
