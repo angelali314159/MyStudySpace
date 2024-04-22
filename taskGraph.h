@@ -12,5 +12,6 @@ public:
     void insertEdge(string name, int minutes, vector<string> dependentTasks);
     vector<string> topSort();
     int getMinutes(string name);
+    void clear();
 };
 
