@@ -31,6 +31,8 @@ string formatDuration(int durationSeconds) {
     return to_string(minutes) + ":" + (seconds < 10 ? "0" : "") + to_string(seconds);
 }
 
+// Jingyi Fu implemented the merge sort and quick sort algorithms, and compared these two sorts according to time difference. 
+
 void merge(vector<pair<string, int>>& songs, int left, int middle, int right) {
     int n1 = middle - left + 1;
     int n2 = right - middle;
