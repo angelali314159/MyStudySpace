@@ -31,7 +31,6 @@ vector<vector<Playlist>> PlaylistGenerator::createPlaylists(const vector<pair<st
         Playlist playlistItem;
         playlistItem.songName = song.first;
         playlistItem.duration = durationSeconds;
-        cout << playlistItem.songName << " " << playlistItem.duration << endl;
         playlists[binIndex].push_back(playlistItem);
     }
     return playlists;
