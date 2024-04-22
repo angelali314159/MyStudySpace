@@ -5,7 +5,7 @@
 #include "playlist.h"
 using namespace std;
 
-// create playlist using first-fit bin-packing algorithm
+// create playlist using best-fit bin-packing algorithm
 vector<vector<Playlist>> PlaylistGenerator::createPlaylists(const vector<pair<std::string, int>> &songs, vector<tuple<string, int, int>> tasks) {
     vector<vector<Playlist>> playlists(tasks.size());
     vector<int> bins;
