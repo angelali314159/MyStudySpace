@@ -5,7 +5,12 @@
 
 using namespace std;
 
-vector<tuple<string, int, int>> ScheduleMaker(vector<tuple<string, int, vector<string>>> tasks);
+class ScheduleMaker {
+  TaskGraph taskGraph;
+public:
+  vector<tuple<string, int, int>> CreateSchedule(vector<tuple<string, int, vector<string>>> tasks);
+  void clear();
+};
+
 int getBreak(int val);
 string getEndTime(string startTime, int minutes);
-void clear();
