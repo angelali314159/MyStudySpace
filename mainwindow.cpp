@@ -91,7 +91,9 @@ void MainWindow::on_generateButton_clicked()
 
     outputWindow *oWindow = new outputWindow();
     //CALL MAKING SCHEDULE FUNCTIONS
-    vector<tuple<string, int, int>> madeSchedule = ScheduleMaker(inputtedTasks);
+    ScheduleMaker newSchedule;
+    newSchedule.createSchedule(inputtedTasks);
+    vector<tuple<string, int, int>> madeSchedule = newSchedule.getSchedule();
 
 
     //CALL MUSIC PLAYLIST FUNCTIONS
