@@ -17,7 +17,7 @@ class outputWindow : public QMainWindow
 public:
     explicit outputWindow(QWidget *parent = nullptr);
     ~outputWindow();
-    void getOutput(ScheduleMaker& s, vector<pair<string, string>> ss, string t, string g);
+    void getOutput(ScheduleMaker& s, string t, string g);
     void setOutput();
 
 private slots:

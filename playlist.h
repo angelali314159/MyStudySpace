@@ -10,6 +10,6 @@ struct Playlist{
 };
 
 class PlaylistGenerator{
-    public:
-        static vector<vector<<Playlist>> createPlaylists(const vector<pair<string, int>>& songs, vector<tuple<string, int, int>> tasks);
+public:
+    static vector<vector<Playlist>> createPlaylists(const vector<pair<string, int>>& songs, vector<tuple<string, int, int>> tasks);
 };

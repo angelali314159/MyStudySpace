@@ -139,7 +139,7 @@
     </property>
     <property name="dateTime">
      <datetime>
-      <hour>5</hour>
+      <hour>10</hour>
       <minute>0</minute>
       <second>0</second>
       <year>2000</year>
@@ -327,6 +327,59 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="currentText">
+     <string>Classical Piano</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Classical Piano</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Country</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Edm</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hip Hop</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Indie</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Jazz</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>K-pop</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Latin</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Math Pop</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Metal</string>
+     </property>
+    </item>
     <item>
      <property name="text">
       <string>Pop</string>
@@ -339,17 +392,32 @@
     </item>
     <item>
      <property name="text">
-      <string>K-pop</string>
+      <string>R&amp;b</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Indie</string>
+      <string>Saxophone</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Jazz</string>
+      <string>Sleep</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Soul</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surf Music</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Violin</string>
      </property>
     </item>
    </widget>

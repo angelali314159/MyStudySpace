@@ -94,10 +94,7 @@ void MainWindow::on_generateButton_clicked()
     ScheduleMaker newSchedule;
     newSchedule.createSchedule(inputtedTasks);
 
-
-    //CALL MUSIC PLAYLIST FUNCTIONS
-    vector<pair<string, string>> madeSongs;
-    oWindow->getOutput(newSchedule, madeSongs, startTime, musicGenre);
+    oWindow->getOutput(newSchedule, startTime, musicGenre);
     oWindow->setOutput();
     oWindow->show();
 

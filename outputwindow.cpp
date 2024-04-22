@@ -18,7 +18,7 @@ using namespace std::chrono;
 using namespace std;
 
 vector<tuple<string, int, int>> outputSchedule;
-vector<pair<string, string>> outputSongs;
+vector<vector<Playlist>> outputSongs;
 string coffeeRec;
 string startTimeIn;
 string genre;
@@ -123,7 +123,7 @@ void compareSorts(vector<pair<string, int>>& songs){
 //return a string of artists' IDs
 vector<string> searchArtistsByGenre(const string& genre, const string& token){
     vector<string> artists_ID;
-    string query = "genre:%22"+genre+"%22";
+    string query = "genre:%22jazz%22";
     string endpoint = "/v1/search";
     map<string, string> options = {
         {"q", query},
@@ -211,23 +211,23 @@ outputWindow::~outputWindow()
     delete ui;
 }
 
-void outputWindow::getOutput(ScheduleMaker& s, vector<pair<string, string>> ss, string t, string g)
+void outputWindow::getOutput(ScheduleMaker& s, string t, string g)
 {
     outputSchedule = s.getSchedule();
-    outputSongs = ss;
     startTimeIn = t;
     genre = g;
 }
 
 string outputWindow::getCoffeeRec()
 {
+
     srand(time(0));
     int random = 2 + (arc4random() % 989);
 
     //read in csv file
     //cout << std::file_system::current_path() << endl;
 
-    std::ifstream file("/Users/angelali/Testing/coffeeDatabase.csv");
+    std::ifstream file("/Users/angelali/Testing/coffeeDatabase.csv"); //CHANGE FILE LOCATION
     if (!file.is_open()) {
         cout << "file didn't open" << endl;
     }
@@ -247,6 +247,29 @@ string outputWindow::getCoffeeRec()
 void outputWindow::setOutput()
 {
     string token = refreshToken();
+    vector<string> artistIds = searchArtistsByGenre(genre, token);
+    //  get top tracks for each artist
+    vector<pair<string, int>> songs; // Song name and duration
+    for (const auto& artistId : artistIds) {
+        auto artistSongs = getArtistsTopTracks(artistId, token);
+        for (const auto& artistSong : artistSongs) {
+            bool found = false;
+            for (const auto& song : songs) {
+                if (song.first == artistSong.first && song.second == artistSong.second) {
+                    found = true;
+                    break;
+                }
+            }
+            // If the song is not found in the list, add it
+            if (!found) {
+                songs.push_back(artistSong);
+            }
+        }
+    }
+    compareSorts(songs);
+    quickSort(songs, 0, songs.size()-1);
+
+    outputSongs = PlaylistGenerator::createPlaylists(songs, outputSchedule);
 
     string prevEndTime = startTimeIn;
     for (int i = 0; i < outputSchedule.size(); i++) {
@@ -262,38 +285,10 @@ void outputWindow::setOutput()
 
         ui->songListBox->addItem(QString::fromStdString("*******************************************"));
         ui->songListBox->addItem(QString::fromStdString(get<0>(outputSchedule[i]) + " for " + to_string(get<1>(outputSchedule[i])) + " minutes"));
-        vector<string> artistIds = searchArtistsByGenre(genre, token);
 
-        //  get top tracks for each artist
-        vector<pair<string, int>> songs; // Song name and duration
-        for (const auto& artistId : artistIds) {
-            auto artistSongs = getArtistsTopTracks(artistId, token);
-            for (const auto& artistSong : artistSongs) {
-                bool found = false;
-                for (const auto& song : songs) {
-                    if (song.first == artistSong.first && song.second == artistSong.second) {
-                        found = true;
-                        break;
-                    }
-                }
-                // If the song is not found in the list, add it
-                if (!found) {
-                    songs.push_back(artistSong);
-                }
-            }
+        for (int x = 0; x < outputSongs[i].size(); x++){
+            ui->songListBox->addItem(QString::fromStdString(outputSongs[i][x].songName + "\t" + formatDuration((outputSongs[i][x].duration))));
         }
-        compareSorts(songs);
-        quickSort(songs, 0, songs.size()-1);
-        vector<Playlist> playlist = PlaylistGenerator::createPlaylist(songs, get<1>(outputSchedule[i]));
-        for (auto song : playlist){
-            ui->songListBox->addItem(QString::fromStdString(song.songName + "\t" + formatDuration((song.duration))));
-        }
-    }
-
-    //outputting songs
-    for(auto song : outputSongs)
-    {
-        ui->songListBox->addItem(QString::fromStdString("Song: " + get<0>(song) + "       " + get<1>(song)));
     }
 
     //output coffee rec
