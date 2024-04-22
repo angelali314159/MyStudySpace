@@ -123,7 +123,7 @@ void compareSorts(vector<pair<string, int>>& songs){
 //return a string of artists' IDs
 vector<string> searchArtistsByGenre(const string& genre, const string& token){
     vector<string> artists_ID;
-    string query = "genre:%22jazz%22";
+    string query = "genre:%22"+genre+"%22";
     string endpoint = "/v1/search";
     map<string, string> options = {
         {"q", query},
