@@ -7,8 +7,9 @@ using namespace std;
 
 class ScheduleMaker {
   TaskGraph taskGraph;
+  vector<tuple<string, int, int>> schedule;
 public:
-  vector<tuple<string, int, int>> CreateSchedule(vector<tuple<string, int, vector<string>>> tasks);
+  createSchedule(vector<tuple<string, int, vector<string>>> tasks);
   void clear();
 };
 
