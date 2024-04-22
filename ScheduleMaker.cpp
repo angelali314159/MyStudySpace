@@ -1,11 +1,9 @@
-//
-// Created by evely on 4/19/2024.
-//
-
+// Evelyn Colon, class methods for ScheduleMaker and some utility functions
 
 #include "ScheduleMaker.h"
 #include <sstream>
 
+// generates the schedule
 void ScheduleMaker::createSchedule(vector<tuple<string, int, vector<string>>> tasks) {
     for (int i = 0; i < tasks.size(); i++) {
         string name = get<0>(tasks[i]);
@@ -23,10 +21,12 @@ void ScheduleMaker::createSchedule(vector<tuple<string, int, vector<string>>> ta
     }
 }
 
+// returns the schedule vector of tuple
 vector<tuple<string, int, int>> ScheduleMaker::getSchedule() {
     return schedule;
 }
 
+// returns the length of time a break should be after a task, utility function
 int getBreak(int val) {
         if (val < 5) {
             return 1;
@@ -34,9 +34,12 @@ int getBreak(int val) {
         return val / 5;
 }
 
+// clears the schedule, class method, unused
 void ScheduleMaker::clear() {
     taskGraph.clear();
 }
+
+// returns the end time of a task, utility function
 string getEndTime(string startTime, int minutes) {
     istringstream stream(startTime);
     string hourToken;
