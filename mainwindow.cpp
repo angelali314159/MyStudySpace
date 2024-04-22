@@ -1,9 +1,13 @@
 #include "./ui_mainwindow.h"
 #include "outputwindow.h"
 #include "mainwindow.h"
+#include "ScheduleMaker.h"
 #include <QLineEdit>
+#include <queue>
 #include <vector>
 #include <iostream>
+#include <unordered_set>
+#include <sstream>
 
 using namespace std;
 
@@ -14,7 +18,6 @@ vector<tuple<string, int, vector<string>>> inputtedTasks;
 tuple<string, int, vector<string>> tempTask;
 string startTime;
 string musicGenre;
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -82,18 +85,19 @@ void MainWindow::on_finalTaskButton_clicked()
 
 void MainWindow::on_generateButton_clicked()
 {
-    startTime = ui->startTimeBox->time().toString(QString::fromStdString("H:mm a")).toStdString();
+    startTime = ui->startTimeBox->time().toString(QString::fromStdString("H:mm")).toStdString();
     musicGenre = ui->musicGenreBox->currentText().toStdString();
     this->hide();
 
     outputWindow *oWindow = new outputWindow();
     //CALL MAKING SCHEDULE FUNCTIONS
-    //vector<tuple<string, int, int>> madeSchedule = ScheduleMaker(inputtedTasks);
+    vector<tuple<string, int, int>> madeSchedule = ScheduleMaker(inputtedTasks);
 
 
     //CALL MUSIC PLAYLIST FUNCTIONS
-    //vector<pair<string, string>> madeSongs =
-    //oWindow->getOutput(madeSchedule, madeSongs);
+    vector<pair<string, string>> madeSongs;
+    oWindow->getOutput(madeSchedule, madeSongs, startTime);
+    oWindow->setOutput();
     oWindow->show();
 
 }

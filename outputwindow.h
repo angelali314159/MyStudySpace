@@ -16,14 +16,15 @@ class outputWindow : public QMainWindow
 public:
     explicit outputWindow(QWidget *parent = nullptr);
     ~outputWindow();
-    void getOutput(vector<tuple<string, int, int>> s, vector<pair<string, string>> ss);
+    void getOutput(vector<tuple<string, int, int>> s, vector<pair<string, string>> ss, string t);
+    void setOutput();
 
 private slots:
     void on_againButton_clicked();
 
 private:
     Ui::outputWindow *ui;
-    void setOutput();
+
     string getCoffeeRec();
 };
 

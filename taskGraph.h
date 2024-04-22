@@ -1,3 +1,4 @@
+
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -12,3 +13,4 @@ public:
     vector<string> topSort();
     int getMinutes(string name);
 };
+

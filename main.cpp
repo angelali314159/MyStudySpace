@@ -1,30 +1,50 @@
-
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
+#include "mainwindow.h"
 #include "json.h"
 #include "curlUtils.h"
+
 #include <utility>
-#include <tuple>
-#include "ScheduleMaker.h"
+#include <QApplication>
+#include <algorithm>
+
+using json = nlohmann::json;
 using namespace std;
 using namespace std::chrono;
-using json = nlohmann::json;
-=======
-#include "mainwindow.h"
-#include "outputwindow.h"
 
-#include <QApplication>
+void merge(vector<pair<string, int>>& songs, int left, int middle, int right) {
+    int n1 = middle - left + 1;
+    int n2 = right - middle;
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec(); //enter event loop
+    vector<pair<string, int>> L(n1), R(n2);
+    // Copy data to temp arrays L[] and R[]
+    for (int i = 0; i < n1; i++)
+        L[i] = songs[left + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = songs[middle + 1 + j];
+    // Merge the temp arrays back into songs
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (L[i].second <= R[j].second) {
+            songs[k] = L[i];
+            i++;
+        } else {
+            songs[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    // Copy the remaining elements of L[]
+    while (i < n1) {
+        songs[k] = L[i];
+        i++;
+        k++;
+    }
+    // Copy the remaining elements of R[]
+    while (j < n2) {
+        songs[k] = R[j];
+        j++;
+        k++;
+    }
 }
-
 void mergeSort(vector<pair<string, int>>& songs, int left, int right) {
     if (left < right) {
         int middle = left + (right - left) / 2;
@@ -85,9 +105,9 @@ vector<string> searchArtistsByGenre(const string& genre, const string& token){
     string query = "genre:%22jazz%22";
     string endpoint = "/v1/search";
     map<string, string> options = {
-            {"q", query},
-            {"type", "artist"},
-            {"limit", "20"} // Adjust
+        {"q", query},
+        {"type", "artist"},
+        {"limit", "20"} // Adjust
     };
 
     options["Authorization"] = "Bearer " + token;
@@ -159,82 +179,11 @@ string refreshToken() {
 }
 
 
-int main(int argc, char*argv[]) {
+//*************************************************************************************************************************************
+int main(int argc, char *argv[])
+{
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    return a.exec();
-    // Evelyn Colon: test of graph code
-    vector<string> dependentTasks1 = {"Complete Review Sheet", "Complete Practice Exam", "Review MATLAB"};
-    tuple<string, int, vector<string>> task1 = make_tuple("Watch Review Lectures", 50, dependentTasks1);
-    vector<string> dependentTasks2 = {"Review Lecture Notes"};
-    tuple<string, int, vector<string>> task2 = make_tuple("Complete Review Sheet", 120, dependentTasks2);
-    tuple<string, int, vector<string>> task3 = make_tuple("Complete Practice Exam", 120, dependentTasks2);
-    tuple<string, int, vector<string>> task4 = make_tuple("Review MATLAB", 30, dependentTasks2);
-    vector<string> emptyDependency;
-    tuple<string, int, vector<string>> task5 = make_tuple("Review Lecture Notes", 60, emptyDependency);
-    vector<tuple<string, int, vector<string>>> tasks = {task1, task2, task3, task4, task5};
-    vector<tuple<string, int, int>> schedule = ScheduleMaker(tasks);
-    string prevEndTime = "9:00AM";
-    for (int i = 0; i < schedule.size(); i++) {
-        string name = get<0>(schedule[i]);
-        int minutes = get<1>(schedule[i]);
-        int breakTime = get<2>(schedule[i]);
-        string startTime = prevEndTime;
-        bool morning;
-        if (startTime[startTime.length() - 2] == 'a') {
-            morning = true;
-        }
-        else {
-            morning = false;
-        }
-        prevEndTime = getEndTime(startTime, minutes, morning);
-        cout << startTime << ": " << name << endl;
-        startTime = prevEndTime;
-        if (startTime[startTime.length() - 2] == 'a') {
-            morning = true;
-        }
-        else {
-            morning = false;
-        }
-        prevEndTime = getEndTime(startTime, breakTime, morning);
-        cout << startTime << ": " << "Break!" << endl;
-    }
-    string genre = "jazz";
-    string token = refreshToken();
-
-    cout << "New token: " << token << endl;
-
-    // 1. search related artists by genre
-    vector<string> artistIds = searchArtistsByGenre(genre, token);
-
-    // 2. get top tracks for each artist
-    vector<pair<string, int>> songs; // Song name and duration
-    for (const auto& artistId : artistIds) {
-        auto artistSongs = getArtistsTopTracks(artistId, token);
-        for (const auto& artistSong : artistSongs) {
-            // Check if the song already exists in the list
-            bool found = false;
-            for (const auto& song : songs) {
-                if (song.first == artistSong.first && song.second == artistSong.second) {
-                    found = true;
-                    break;
-                }
-            }
-            // If the song is not found in the list, add it
-            if (!found) {
-                songs.push_back(artistSong);
-            }
-        }
-    }
-
-    // 3. search songs by duration
-    compareSorts(songs);
-    quickSort(songs, 0, songs.size()-1);
-    // vector<pair<string, int>> songs
-    cout << "Songs in the genre " << genre << ":" << endl;
-    for (const auto& song : songs) {
-        cout << "Song Name: " << song.first << ", Duration: " << song.second << "ms" << endl;
-    }
-    return 0;
+    return a.exec(); //enter event loop
 }

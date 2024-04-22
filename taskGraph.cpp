@@ -1,6 +1,8 @@
 //
 // Created by evely on 4/19/2024.
 //
+
+
 #include <unordered_set>
 #include <queue>
 #include "taskGraph.h"
@@ -43,3 +45,4 @@ vector<string> TaskGraph::topSort() {
 int TaskGraph::getMinutes(string name) {
     return taskTime[name];
 }
+
