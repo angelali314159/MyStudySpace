@@ -19,8 +19,7 @@
   |  |  |  |( (  |  |  |  |  |  |  |  |  |  |
   |  |  |  | ) ) |  |  |  |  |  |  |  |  |  |
   |  |  |  |(_(  |  |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-  jgs|  |  |  |  |  |  |  |  |  |  |  |  |  |⠀⠀⠀⠀⠀
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |⠀
 
 NOTE: In outputWindow.cpp on line 230, the FILE LOCATION MUST BE CHANGED TO BE CORRECT
 
