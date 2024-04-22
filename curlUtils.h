@@ -122,7 +122,9 @@ json SpotifyCurlInternal(const string& request, const string& endpoint, const ma
     }
 }
 
-// spotify api requests
+/* spotify api requests
+code adapted from the nlohmann::json library
+*/
 
 // SPOTIFY GET //
 json SpotifyGET(string endpoint, map<string, string> options, string authToken, string body = ""){
