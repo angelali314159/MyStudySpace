@@ -4,6 +4,7 @@
 #include <algorithm>
 using namespace std;
 
+// Jingyi Fu, generates the Playlist object including songName and duration of time
 struct Playlist{
     string songName;
     int duration;
