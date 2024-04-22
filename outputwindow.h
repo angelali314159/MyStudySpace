@@ -2,6 +2,7 @@
 #define OUTPUTWINDOW_H
 
 #include <QMainWindow>
+#include "ScheduleMaker.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ class outputWindow : public QMainWindow
 public:
     explicit outputWindow(QWidget *parent = nullptr);
     ~outputWindow();
-    void getOutput(vector<tuple<string, int, int>> s, vector<pair<string, string>> ss, string t);
+    void getOutput(ScheduleMaker& s, vector<pair<string, string>> ss, string t, string g);
     void setOutput();
 
 private slots:

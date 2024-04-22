@@ -1,4 +1,4 @@
-
+#pragma once
 #include <string>
 #include <vector>
 #include "taskGraph.h"
@@ -9,8 +9,9 @@ class ScheduleMaker {
   TaskGraph taskGraph;
   vector<tuple<string, int, int>> schedule;
 public:
-  createSchedule(vector<tuple<string, int, vector<string>>> tasks);
+  void createSchedule(vector<tuple<string, int, vector<string>>> tasks);
   void clear();
+  vector<tuple<string, int, int>> getSchedule();
 };
 
 int getBreak(int val);

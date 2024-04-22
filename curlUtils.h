@@ -76,7 +76,7 @@ json SpotifyCurlInternal(const string& request, const string& endpoint, const ma
     }
 
     // debugger
-    cout << "Request URL: " << url << endl;
+    //cout << "Request URL: " << url << endl;
 
 
     CURLcode rc = curl_easy_perform(curl);

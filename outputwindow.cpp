@@ -24,6 +24,13 @@ string startTimeIn;
 string genre;
 
 //*************************************************************************************************
+
+string formatDuration(int durationSeconds) {
+    int minutes = durationSeconds / 60;
+    int seconds = durationSeconds % 60;
+    return to_string(minutes) + ":" + (seconds < 10 ? "0" : "") + to_string(seconds);
+}
+
 void merge(vector<pair<string, int>>& songs, int left, int middle, int right) {
     int n1 = middle - left + 1;
     int n2 = right - middle;
@@ -37,7 +44,7 @@ void merge(vector<pair<string, int>>& songs, int left, int middle, int right) {
     // Merge the temp arrays back into songs
     int i = 0, j = 0, k = left;
     while (i < n1 && j < n2) {
-        if (L[i].second <= R[j].second) {
+        if (L[i].second >= R[j].second) {
             songs[k] = L[i];
             i++;
         } else {
@@ -75,7 +82,7 @@ int partition(vector<pair<string, int>>& songs, int low, int high){
 
     for (int j = low; j<= high -1; j++){
         // if the song's duration is smaller than or equal to the pivot
-        if (songs[j].second <= pivot){
+        if (songs[j].second >= pivot){
             i++;
             swap(songs[i], songs[j]);
         }
@@ -204,9 +211,9 @@ outputWindow::~outputWindow()
     delete ui;
 }
 
-void outputWindow::getOutput(vector<tuple<string, int, int>> s, vector<pair<string, string>> ss, string t, string g)
+void outputWindow::getOutput(ScheduleMaker& s, vector<pair<string, string>> ss, string t, string g)
 {
-    outputSchedule = s;
+    outputSchedule = s.getSchedule();
     outputSongs = ss;
     startTimeIn = t;
     genre = g;
@@ -279,7 +286,7 @@ void outputWindow::setOutput()
         quickSort(songs, 0, songs.size()-1);
         vector<Playlist> playlist = PlaylistGenerator::createPlaylist(songs, get<1>(outputSchedule[i]));
         for (auto song : playlist){
-            ui->songListBox->addItem(QString::fromStdString(song.songName + to_string(song.duration)));
+            ui->songListBox->addItem(QString::fromStdString(song.songName + "\t" + formatDuration((song.duration))));
         }
     }
 

@@ -53,6 +53,7 @@
     <property name="font">
      <font>
       <family>Marker Felt</family>
+      <pointsize>14</pointsize>
       <bold>true</bold>
      </font>
     </property>
@@ -93,7 +94,8 @@
     <property name="font">
      <font>
       <family>Marker Felt</family>
-      <bold>true</bold>
+      <italic>true</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="text">
@@ -184,6 +186,7 @@
     <property name="font">
      <font>
       <family>Marker Felt</family>
+      <pointsize>18</pointsize>
       <bold>true</bold>
      </font>
     </property>

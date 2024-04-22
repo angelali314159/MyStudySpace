@@ -25,7 +25,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Testing
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        outputwindow.h outputwindow.cpp outputwindow.ui ScheduleMaker.cpp ScheduleMaker.h taskGraph.cpp taskGraph.h json.h curlUtils.h
+        outputwindow.h outputwindow.cpp outputwindow.ui ScheduleMaker.cpp ScheduleMaker.h taskGraph.cpp taskGraph.h json.h curlUtils.h playlist.cpp playlist.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Testing APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
