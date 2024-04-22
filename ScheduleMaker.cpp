@@ -6,19 +6,17 @@
 #include "ScheduleMaker.h"
 #include <sstream>
 
-vector<tuple<string, int, int>> ScheduleMaker(vector<tuple<string, int, vector<string>>> tasks) {
-    vector<tuple<string, int, int>> schedule;
-    TaskGraph graph;
+vector<tuple<string, int, int>> ScheduleMaker::CreateSchedule(vector<tuple<string, int, vector<string>>> tasks) {
     for (int i = 0; i < tasks.size(); i++) {
         string name = get<0>(tasks[i]);
         int minutes = get<1>(tasks[i]);
         vector<string> dependentTasks = get<2>(tasks[i]);
-        graph.insertEdge(name, minutes, dependentTasks);
+        taskGraph.insertEdge(name, minutes, dependentTasks);
     }
-    vector<string> sorted = graph.topSort();
+    vector<string> sorted = taskGraph.topSort();
     for (int i = 0; i < sorted.size(); i++) {
         string name = sorted[i];
-        int minutes = graph.getMinutes(name);
+        int minutes = taskGraph.getMinutes(name);
         int breakTime = getBreak(minutes);
         tuple<string, int, int> element = make_tuple(name, minutes, breakTime);
         schedule.push_back(element);
@@ -33,6 +31,9 @@ int getBreak(int val) {
         return val / 5;
 }
 
+void ScheduleMaker::clear() {
+    taskGraph.clear;
+}
 string getEndTime(string startTime, int minutes) {
     istringstream stream(startTime);
     string hourToken;
