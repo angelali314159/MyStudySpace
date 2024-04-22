@@ -46,3 +46,8 @@ int TaskGraph::getMinutes(string name) {
     return taskTime[name];
 }
 
+void TaskGraph::clear(){
+    adjList.clear();
+    taskTime.clear();
+    inDegrees.clear();
+}
