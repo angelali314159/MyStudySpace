@@ -6,7 +6,7 @@
 #include "ScheduleMaker.h"
 #include <sstream>
 
-ScheduleMaker::createSchedule(vector<tuple<string, int, vector<string>>> tasks) {
+void ScheduleMaker::createSchedule(vector<tuple<string, int, vector<string>>> tasks) {
     for (int i = 0; i < tasks.size(); i++) {
         string name = get<0>(tasks[i]);
         int minutes = get<1>(tasks[i]);
@@ -21,6 +21,9 @@ ScheduleMaker::createSchedule(vector<tuple<string, int, vector<string>>> tasks) 
         tuple<string, int, int> element = make_tuple(name, minutes, breakTime);
         schedule.push_back(element);
     }
+}
+
+vector<tuple<string, int, int>> ScheduleMaker::getSchedule() {
     return schedule;
 }
 
