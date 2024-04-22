@@ -9,6 +9,7 @@
 
 using namespace std;
 using json = nlohmann::json;
+// Jingyi Fu
 
 // catch exceptions for errors related to cURL operations
 class CurlException : public exception {
