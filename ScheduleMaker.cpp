@@ -32,7 +32,7 @@ int getBreak(int val) {
 }
 
 void ScheduleMaker::clear() {
-    taskGraph.clear;
+    taskGraph.clear();
 }
 string getEndTime(string startTime, int minutes) {
     istringstream stream(startTime);
