@@ -15,11 +15,6 @@
           |     |
          /       \
          \       /
-  _/\_/\_/\__  _/_/\_/\_/\_/\_/\_/\_/\_/\_/\_
-  |  |  |  |( (  |  |  |  |  |  |  |  |  |  |
-  |  |  |  | ) ) |  |  |  |  |  |  |  |  |  |
-  |  |  |  |(_(  |  |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |⠀
 
 NOTE: In outputWindow.cpp on line 230, the FILE LOCATION MUST BE CHANGED TO BE CORRECT
 
