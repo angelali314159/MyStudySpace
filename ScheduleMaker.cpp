@@ -32,7 +32,7 @@ int getBreak(int val) {
         return val / 5;
 }
 
-string getEndTime(string startTime, int minutes, bool am) {
+string getEndTime(string startTime, int minutes) {
     istringstream stream(startTime);
     string hourToken;
     getline(stream, hourToken, ':');
@@ -48,11 +48,8 @@ string getEndTime(string startTime, int minutes, bool am) {
         hour += 1;
         minute -= 60;
     }
-    if (hour >= 12 && hourToken != "12") {
-        am = !am;
-    }
-    if (hour > 12) {
-        hour = hour - 12;
+    if (hour >= 24) {
+        hour = hour - 24;
     }
     string time;
     time += to_string(hour);
@@ -61,11 +58,5 @@ string getEndTime(string startTime, int minutes, bool am) {
         time += '0';
     }
     time += to_string(minute);
-    if (am) {
-        time += " am";
-    }
-    else {
-        time += " pm";
-    }
     return time;
 }
