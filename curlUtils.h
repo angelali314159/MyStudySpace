@@ -35,7 +35,7 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, string* u
     return size * nmemb;
 }
 
-string ReplaceAll(string str, const string& from, const string& to) {
+string Replace(string str, const string& from, const string& to) {
     size_t start_pos = 0;
     while ((start_pos = str.find(from, start_pos)) != string::npos) {
         str.replace(start_pos, from.length(), to);
@@ -44,16 +44,6 @@ string ReplaceAll(string str, const string& from, const string& to) {
     return str;
 }
 
-string vectorJoin(const vector<string>& vector) {
-    stringstream ss;
-    for (size_t i = 0; i < vector.size(); ++i) {
-        if (i != 0) {
-            ss << ",";
-        }
-        ss << vector[i];
-    }
-    return ss.str();
-}
 
 json SpotifyCurlInternal(const string& request, const string& endpoint, const map<string, string>& options, const string& authToken, const string& body = "") {
     CURL* curl = curl_easy_init();
@@ -65,7 +55,7 @@ json SpotifyCurlInternal(const string& request, const string& endpoint, const ma
     if (!options.empty()) {
         url += "?";
         for (const auto& option : options) {
-            url += option.first + "=" + ReplaceAll(option.second, " ", "%20") + '&';
+            url += option.first + "=" + Replace(option.second, " ", "%20") + '&';
         }
         url.pop_back(); // Remove the last '&' character
     }
