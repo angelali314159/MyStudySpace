@@ -11,5 +11,5 @@ struct Playlist{
 
 class PlaylistGenerator{
     public:
-        static vector<Playlist> createPlaylist(const vector<pair<string, int>>& songs, int task_duration);
+        static vector<vector<<Playlist>> createPlaylists(const vector<pair<string, int>>& songs, vector<tuple<string, int, int>> tasks);
 };
