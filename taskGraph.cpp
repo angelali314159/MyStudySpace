@@ -1,11 +1,12 @@
 // Evelyn Colon, taskGraph implementation
 
-#include <unordered_set>
-#include <queue>
-#include "taskGraph.h"
-
 // inspired by Project 2 PageRank submission
 // inserts an edge into the graph
+#include <unordered_set>
+#include <queue>
+#include <iostream>
+#include "taskGraph.h"
+
 void TaskGraph::insertEdge(string name, int minutes, vector<string> dependentTasks) {
     taskTime.emplace(name, minutes);
     adjList.emplace(name, dependentTasks);
@@ -21,7 +22,7 @@ vector<string> TaskGraph::topSort() {
     unordered_set<string> visited;
     vector<string> sorted;
     for (auto task : adjList) {
-        if(inDegrees.find(task.first) == inDegrees.end() || inDegrees[task.first] == 0) {
+        if((inDegrees.find(task.first) == inDegrees.end() || inDegrees[task.first] == 0) && visited.count(task.first) == 0) {
             q.push(task.first);
             visited.insert(task.first);
         }
@@ -36,6 +37,7 @@ vector<string> TaskGraph::topSort() {
                     visited.insert(dep);
                 }
             }
+           // cout << curr << endl;
             q.pop();
         }
     }
