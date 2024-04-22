@@ -1,12 +1,13 @@
 // Evelyn Colon, taskGraph implementation
 
-// inspired by Project 2 PageRank submission
-// inserts an edge into the graph
+
 #include <unordered_set>
 #include <queue>
 #include <iostream>
 #include "taskGraph.h"
 
+// inspired by Project 2 PageRank submission
+// inserts an edge into the graph
 void TaskGraph::insertEdge(string name, int minutes, vector<string> dependentTasks) {
     taskTime.emplace(name, minutes);
     adjList.emplace(name, dependentTasks);
