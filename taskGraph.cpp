@@ -7,6 +7,8 @@
 #include <queue>
 #include "taskGraph.h"
 
+// inspired by Project 2 PageRank submission
+// inserts an edge into the graph
 void TaskGraph::insertEdge(string name, int minutes, vector<string> dependentTasks) {
     taskTime.emplace(name, minutes);
     adjList.emplace(name, dependentTasks);
@@ -16,6 +18,7 @@ void TaskGraph::insertEdge(string name, int minutes, vector<string> dependentTas
 }
 
 // inspired by topSort psuedocode, module 8b lecture slide 115
+// sorts the tasks based on dependencies
 vector<string> TaskGraph::topSort() {
     queue<string> q;
     unordered_set<string> visited;
@@ -42,10 +45,12 @@ vector<string> TaskGraph::topSort() {
     return sorted;
 }
 
+// returns the length of time of the function
 int TaskGraph::getMinutes(string name) {
     return taskTime[name];
 }
 
+// clears the graph--unused
 void TaskGraph::clear(){
     adjList.clear();
     taskTime.clear();
