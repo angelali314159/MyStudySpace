@@ -10,6 +10,7 @@
 using namespace std;
 using json = nlohmann::json;
 
+// catch exceptions for errors related to cURL operations
 class CurlException : public exception {
 private:
     string errorMessage;
@@ -20,6 +21,7 @@ public:
     }
 };
 
+// catch exceptions when interacting with the Spotify API
 class SpotifyException : public exception {
 private:
     string message;
@@ -30,6 +32,7 @@ public:
     }
 };
 
+// functions for handling data from Spotify API request
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, string* userp) {
     userp->append((char*)contents, size * nmemb);
     return size * nmemb;
@@ -102,11 +105,10 @@ json SpotifyCurlInternal(const string& request, const string& endpoint, const ma
                 string errorMsg = errorJson.value("error", "Unknown error occurred");
                 throw SpotifyException("HTTP Error: Status code " + to_string(statusCode) + " - " + errorMsg);
             } catch (const json::exception& e) {
-                // Fallback in case parsing fails
+                // parsing fails
                 throw SpotifyException("HTTP Error: Status code " + to_string(statusCode) + " - Failed to parse error response");
             }
         } else {
-            // No additional information available
             throw SpotifyException("HTTP Error: Status code " + to_string(statusCode));
         }
     }
