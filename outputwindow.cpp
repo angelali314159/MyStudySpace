@@ -98,7 +98,7 @@ void quickSort(vector<pair<string, int>>& songs, int low, int high){
     }
 }
 
-// compare merge sorts and quick sorts
+// compare merge sorts and quick sorts in milleseconds
 void compareSorts(vector<pair<string, int>>& songs){
     vector<pair<string, int>> songsForMergeSort = songs;
     vector<pair<string, int>> songsForQuickSort = songs;
@@ -120,11 +120,18 @@ void compareSorts(vector<pair<string, int>>& songs){
     cout << "Merge Sort took: " << durationMergeSort.count() << " microseconds" << endl;
 }
 
-//return a string of artists' IDs
+// return a string of artists' IDs by an inputted genre
 vector<string> searchArtistsByGenre(const string& genre, const string& token){
     vector<string> artists_ID;
+
+    /*
+        code adapted from the Spotify API for Developers
+        https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+    */
+    
     string query = "genre:%22jazz%22";
     string endpoint = "/v1/search";
+
     map<string, string> options = {
         {"q", query},
         {"type", "artist"},
@@ -133,6 +140,8 @@ vector<string> searchArtistsByGenre(const string& genre, const string& token){
 
     options["Authorization"] = "Bearer " + token;
 
+
+    
     // make the GET request to spotify
     json response;
     try {
@@ -170,6 +179,12 @@ vector<pair<string, int>> getArtistsTopTracks(const string& artistsID, const str
     }
     return topTracks;
 };
+
+/*
+    clientId = "d5c3d2aa60854adf85215434d7d9afe3"
+    clientSecret = "f4ec1b86020a48139856ff3e776adcfc"
+    The above data are from the Spotify for Developers. The ID and the Secret are both unique, and only applicable for this project.
+*/
 
 string refreshToken() {
     string clientId = "d5c3d2aa60854adf85215434d7d9afe3";
