@@ -1,7 +1,4 @@
-//
-// Created by evely on 4/19/2024.
-//
-
+// Evelyn Colon, taskGraph implementation
 
 #include <unordered_set>
 #include <queue>
